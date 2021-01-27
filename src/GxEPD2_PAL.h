@@ -25,11 +25,11 @@
 // SCK on EXP 8 (SPI_SCLK)
 #define SCK_PORT  gpioPortF
 #define SCK_PIN   7
-#define SCK_LOC   27
+#define SCK_LOC   18
 // CS on EXP 10 (SPI_CS)
 #define CS_PORT   gpioPortA
 #define CS_PIN    5
-#define CS_LOC    29
+#define CS_LOC    27
 // DC on EXP 12 (UART_TX)
 #define DISP_DC_PORT   gpioPortF
 #define DISP_DC_PIN    3
@@ -133,9 +133,17 @@ extern "C" {
         return;
     }
   }
-  unsigned long micros(void);
-  void delay(unsigned long ms);
-  void delayMicroseconds(unsigned int us);
+
+  #include "sl_sleeptimer.h"
+  static unsigned long micros(void) {
+    return sl_sleeptimer_tick_to_ms(sl_sleeptimer_get_tick_count()) * 1000;
+  }
+  static void delay(unsigned long ms) {
+    sl_sleeptimer_delay_millisecond(ms);
+  }
+
+  #include "sl_udelay.h"
+  static void delayMicroseconds(unsigned int us) { sl_udelay_wait(us); }
 }
 
 #include <openthread/cli.h>
