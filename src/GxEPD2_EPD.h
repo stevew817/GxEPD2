@@ -12,8 +12,12 @@
 #ifndef _GxEPD2_EPD_H_
 #define _GxEPD2_EPD_H_
 
+#if ARDUINO
 #include <Arduino.h>
 #include <SPI.h>
+#else
+#include "GxEPD2_PAL.h"
+#endif
 
 #include <GxEPD2.h>
 

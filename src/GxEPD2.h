@@ -12,9 +12,12 @@
 #ifndef _GxEPD2_H_
 #define _GxEPD2_H_
 
+#if ARDUINO
 #include <Arduino.h>
 #include <SPI.h>
+#else
 
+#endif
 // color definitions for GxEPD, GxEPD2 and GxEPD_HD, values correspond to RGB565 values for TFTs
 #define GxEPD_BLACK     0x0000
 #define GxEPD_WHITE     0xFFFF

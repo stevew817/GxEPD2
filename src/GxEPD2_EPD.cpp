@@ -13,7 +13,7 @@
 
 #if defined(ESP8266) || defined(ESP32)
 #include <pgmspace.h>
-#else
+#elif ARDUINO
 #include <avr/pgmspace.h>
 #endif
 
