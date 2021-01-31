@@ -291,7 +291,7 @@ void GxEPD2_270c::refresh(int16_t x, int16_t y, int16_t w, int16_t h)
   _writeData(w1 & 0xf8);
   _writeData(h1 >> 8);
   _writeData(h1 & 0xff);
-  _waitWhileBusy("refresh", partial_refresh_time);
+  //_waitWhileBusy("refresh", partial_refresh_time);
 }
 
 void GxEPD2_270c::powerOff()
@@ -336,9 +336,11 @@ void GxEPD2_270c::_PowerOn()
 
 void GxEPD2_270c::_PowerOff()
 {
-  _writeCommand(0x02); // power off
-  _waitWhileBusy("_PowerOff", power_off_time);
-  _power_is_on = false;
+  if(_power_is_on) {
+    _writeCommand(0x02); // power off
+    _waitWhileBusy("_PowerOff", power_off_time);
+    _power_is_on = false;
+  }
 }
 
 void GxEPD2_270c::_InitDisplay()
@@ -475,11 +477,11 @@ void GxEPD2_270c::_Init_Part()
 void GxEPD2_270c::_Update_Full()
 {
   _writeCommand(0x12); //display refresh
-  _waitWhileBusy("_Update_Full", full_refresh_time);
+  //_waitWhileBusy("_Update_Full", full_refresh_time);
 }
 
 void GxEPD2_270c::_Update_Part()
 {
   _writeCommand(0x12); //display refresh
-  _waitWhileBusy("_Update_Part", partial_refresh_time);
+  //_waitWhileBusy("_Update_Part", partial_refresh_time);
 }

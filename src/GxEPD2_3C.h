@@ -269,7 +269,7 @@ class GxEPD2_3C : public GxEPD2_GFX_BASE_CLASS
             }
             else epd2.refresh(true); // partial update after second phase
           } else epd2.refresh(false); // full update after only phase
-          epd2.powerOff();
+          //epd2.powerOff();
           return false;
         }
         fillScreen(GxEPD_WHITE);
