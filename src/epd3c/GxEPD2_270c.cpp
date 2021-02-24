@@ -302,7 +302,7 @@ void GxEPD2_270c::powerOff()
 void GxEPD2_270c::hibernate()
 {
   _PowerOff();
-  if (_rst >= 0)
+  if (_rst >= 0 && !_hibernating)
   {
     _writeCommand(0x07); // deep sleep
     _writeData(0xA5);    // check code
